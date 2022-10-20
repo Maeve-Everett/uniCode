@@ -42,7 +42,7 @@ function move() {
     //y = ((easeInQuad(dur) * 10) * -1) + 800;
     //y = ((sineWave(dur) * 100) + 800);
     y = ((easeInOutBounce(dur)) * -1 + 800);
-    console.log(y);
+    console.log("step: " + dur);
 
     //ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
