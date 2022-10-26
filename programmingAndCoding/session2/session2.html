@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Webpage</title>
+  </head>
+      
+  <body>
+    <h1 id="heading">Webpage Heading</h1>
+    <p id="para">Paragraph of text</p>
+    <p id="paratwo">Another Paragraph of text</p>
+  </body>
+</html>
+
+<script>
+
+
+  function toF(celsius) {
+    return celsius * 9 /5 + 32;
+  }
+
+
+  let cat = "meow"
+  console.log(cat)
+
+  cat = "morning"
+  console.log(cat)
+
+  //let firstentry = prompt("enter a number", "10")
+  //console.log(firstentry)
+
+
+
+  let name = "kieran";
+  let age = 19;
+  let favouriteGame = "celeste";
+  let knowprogramming = true;
+  let arr = [name, age, knowprogramming];
+
+  console.log("My name is " + name + ", I am " + age + ", and my favourite game is " + favouriteGame);
+
+
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+  }
+
+  let temperature = 20;
+  console.log("today's temperature is " + temperature + " celsius and " + toF(temperature) + " farenheit");
+
+
+  let num = prompt("enter number");
+  if (num > 1000) {
+    console.log("greater than 1000");
+  } else {
+    console.log("not greater than 1000");
+  }
+
+
+</script>
