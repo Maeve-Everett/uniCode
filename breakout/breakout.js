@@ -287,7 +287,19 @@ function isWon() {
  * @param brick - the brick sprite
  */
 function hitBrick(ball, brick) {
-  brick.disableBody(true, true);
+  //brick.disableBody(true, true);
+
+  let tween = brick.scene.tweens.addCounter({
+    targets: brick, 
+    from: 1,
+    to: 0,
+    ease: "Sine.easeOut",
+    duration: 200,
+    onUpdate: function(tween){brick.setAngle(tween.getValue() * -40);
+      brick.scaleX = tween.getValue();
+      brick.scaleY = tween.getValue();},
+    onComplete:()=>{brick.disableBody(true, true);}
+  })
 
   if (ball.body.velocity.x == 0) {
     randNum = Math.random();
