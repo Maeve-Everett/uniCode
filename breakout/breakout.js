@@ -6,6 +6,10 @@ let gameStarted = false;
 let openingText, gameOverText, playerWonText;
 let score = 0;
 let scoreText;
+let highScoreText;
+
+let highScore = getCookie('score');
+if (highScore == '') highScore = 0;
 
 // This object contains all the Phaser configurations to load our game
 const config = {
@@ -204,8 +208,8 @@ function create() {
   playerWonText.setVisible(false);
 
   scoreText = this.add.text(
-    this.physics.world.bounds.width / 2,
-    this.physics.world.bounds.height / 2,
+    0,
+    0,
     'Score: ' + score,
     {
       fontFamily: 'Monaco, Courier, monospace',
@@ -214,6 +218,17 @@ function create() {
     },
   );
   scoreText.setVisible(true);
+  highScoreText = this.add.text(
+    0,
+    100,
+    'High Score: ' + highScore,
+    {
+      fontFamily: 'Monaco, Courier, monospace',
+      fontSize: '50px',
+      fill: '#fff'
+    },
+  );
+  highScoreText.setVisible(true);
 }
 
 /**
@@ -305,6 +320,12 @@ function hitBrick(ball, brick) {
   score += 1;
   scoreText.setText('Score: ' + score);
 
+  if (score > highScore) {
+    highScore = score;
+    document.cookie = 'score=' + highScore;
+    highScoreText.setText('High Score: ' + highScore);
+  }
+
   let tween = brick.scene.tweens.addCounter({
     targets: brick, 
     from: 1,
@@ -347,4 +368,21 @@ function hitPlayer(ball, player) {
   } else {
     ball.setVelocityX(newXVelocity);
   }
+}
+
+function getCookie(cname) {
+  let name = cname+ "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+
+  return "";
 }
