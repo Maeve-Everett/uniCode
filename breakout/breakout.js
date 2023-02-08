@@ -5,6 +5,7 @@ let gameStarted = false;
 // Add global text objects
 let openingText, gameOverText, playerWonText;
 let score = 0;
+let scoreText;
 
 // This object contains all the Phaser configurations to load our game
 const config = {
@@ -201,6 +202,18 @@ function create() {
 
   // Make it invisible until the player wins
   playerWonText.setVisible(false);
+
+  scoreText = this.add.text(
+    this.physics.world.bounds.width / 2,
+    this.physics.world.bounds.height / 2,
+    'Score: ' + score,
+    {
+      fontFamily: 'Monaco, Courier, monospace',
+      fontSize: '50px',
+      fill: '#fff'
+    },
+  );
+  scoreText.setVisible(true);
 }
 
 /**
@@ -288,6 +301,9 @@ function isWon() {
  */
 function hitBrick(ball, brick) {
   //brick.disableBody(true, true);
+
+  score += 1;
+  scoreText.setText('Score: ' + score);
 
   let tween = brick.scene.tweens.addCounter({
     targets: brick, 
